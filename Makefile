@@ -6,8 +6,15 @@
 ## You might want to compile your gsl with -DHAVE_INLINE 
 ## 
 
-CFLAGS += -I src -O3 -std=c99 -fopenmp -fPIC -Wall -Werror -Wextra -ansi -pedantic ${CCFLAGS}
+#CFLAGS += -I src -O3 -std=c99 -fopenmp -fPIC -Wall -Werror -Wextra -ansi -pedantic ${CCFLAGS}
+CFLAGS += -I src -O3 -std=c99 -fopenmp -fPIC -Wall  -Wextra -ansi -pedantic ${CCFLAGS}
 LDFLAGS := -lgsl -lgslcblas -lm -lgomp
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS  += -I/opt/local/include
+	LDFLAGS += -L/opt/local/lib
+endif
 
 ifdef WITH_GARBAGE_COLLECTOR
 LDFLAGS := ${LDFLAGS} -lgc
