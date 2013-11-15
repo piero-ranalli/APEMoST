@@ -34,7 +34,7 @@
 #define IFDEBUGPARSER if(0)
 #endif
 
-static int strnlen(char * s, int maxlen) {
+static int mystrnlen(char * s, int maxlen) {
 	int i;
 	for (i = 0; i < maxlen && s[i] != 0; i++)
 		;
@@ -60,7 +60,7 @@ static int load_parameter(mcmc * m, FILE * input, int i) {
 		fprintf(stderr, "only %d fields matched.\n", col);
 		return 1;
 	}
-	if (!(descr != NULL && strnlen(descr, MAX_LINE_LENGTH) > 0 && strnlen(
+	if (!(descr != NULL && mystrnlen(descr, MAX_LINE_LENGTH) > 0 && mystrnlen(
 			descr, MAX_LINE_LENGTH) < MAX_LINE_LENGTH)) {
 		fprintf(stderr, "description invalid: %s\n", descr);
 		return 1;
